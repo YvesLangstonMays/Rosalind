@@ -23,30 +23,34 @@ longest = ""
 
 while index_value < len(values):
     i = 0
+    in_one = False
+    in_two = False
+    in_three = False
     while i < len(values[index_value]):
         current_substring = values[index_value][x:i]
-        print(current_substring)
 
         if index_value == 0:
             if current_substring in values[index_value + 1]:
-                if len(current_substring) > len(longest):
-                    longest = current_substring
-            elif current_substring in values[index_value + 2]:
-                if len(current_substring) > len(longest):
-                    longest = current_substring
+                in_two = True
+            if current_substring in values[index_value + 2]:
+                in_three = True
         elif index_value == 1:
-            if index_value == 0:
-                if current_substring in values[index_value + 1]:
-                    if len(current_substring) > len(longest):
-                        longest = current_substring
-        elif index_value > 2:
-            if current_substring in values[index_value - 1]:
+            if current_substring in values[index_value + 1]:
                 if len(current_substring) > len(longest):
                     longest = current_substring
+                if current_substring in values[index_value - 1]:
+                    in_one = True
+        elif index_value == 2:
+            if current_substring in values[index_value - 1]:
+                in_two = True
+                if current_substring in values[index_value - 2]:
+                    in_one = True
         else:
             print("Out")
             pass
+        if in_one and in_two and in_three:
+            longest = current_substring
         i += 1
 
     index_value += 1
-print(longest)
+print(f"longest: {longest}")
