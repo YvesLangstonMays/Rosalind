@@ -1,8 +1,8 @@
 seq = []
 
 
-def getSeq():
-    with open("RestrictionSites.txt", "r") as RS:
+def FASTA_open(fileName):
+    with open(f"{fileName}", "r") as RS:
         for line in RS:
             line = line.split("\n")
             line = list(filter(None, line))
@@ -30,7 +30,7 @@ def complement(seq):
 
 def restrictionSites():
     size = 4
-    s = getSeq()
+    s = FASTA_open()
     lengthof = len(s)
     reverse_palin_list = []
     complemented = complement(s)
